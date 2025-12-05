@@ -1,4 +1,4 @@
-# 餐厅点餐 Agent (`hello_app`)
+# 餐厅点餐 Agent (`restaurant_ordering`)
 
 本项目展示了一个高级 Agent，其设计目标是成为一个友好且高效的餐厅点餐助手。它展示了 Agent 开发套件（ADK）的几个核心能力。
 
@@ -68,7 +68,7 @@ veadk web
 > **安全提示：请勿在生产环境中禁用密钥认证。确保 `VEFAAS_ENABLE_KEY_AUTH` 保持为 `true`（或不设置，默认为开启），并正确配置访问密钥和角色。只有在本地受控环境调试时，才可临时关闭认证，并务必加以警告。**
 
 ```bash
-cd hello_world
+cd restaurant_ordering
 # 这一步直接运行即可
 export VEFAAS_ENABLE_KEY_AUTH=false
 # 这一步需要把YOUR_AK换成自己的ak
@@ -83,7 +83,7 @@ veadk deploy --vefaas-app-name=order-agent --use-adk-web --veapig-instance-name=
 ### 5. 部署到AgentKit 并且使用client.py测试
 
 ```bash
-cd hello_app
+cd restaurant_ordering
 # Uncomment the following line in agent.py to run the agentkit app server
 # agent_server_app.run(host="0.0.0.0", port=8000)
 agentkit config
