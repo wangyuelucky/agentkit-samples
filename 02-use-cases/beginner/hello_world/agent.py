@@ -26,7 +26,7 @@ async def main():
     print(f"response of round 2: {response2}")
 
 
-# using veadk web for debuging
+# using veadk web for debugging
 root_agent = agent
 
 agent_server_app = AgentkitAgentServerApp(
