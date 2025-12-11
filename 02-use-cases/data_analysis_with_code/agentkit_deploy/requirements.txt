@@ -1,9 +1,0 @@
-veadk-python
-veadk-python[extensions]
-google-adk
-python-dotenv
-lancedb
-agentkit-sdk-python
-volcengine-python-sdk[ark]
-pyarrow
-duckdb
