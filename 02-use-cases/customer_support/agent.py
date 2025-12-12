@@ -75,11 +75,11 @@ should_init_knowledge = False
 try:
     test_knowledge = knowledge.search("商品退换策略", top_k=1)
     should_init_knowledge = not (
-            len(test_knowledge) >= 0
-            and test_knowledge[0].content != ""
-            and str(test_knowledge[0].content).__contains__("商品退换策略")
+        len(test_knowledge) >= 0
+        and test_knowledge[0].content != ""
+        and str(test_knowledge[0].content).__contains__("商品退换策略")
     )
-except Exception as e:
+except Exception:
     should_init_knowledge = True
 
 if should_init_knowledge:
@@ -131,7 +131,7 @@ async def after_agent_execution(callback_context: CallbackContext):
 
 
 after_sale_prompt = (
-        """
+    """
     你是一名专业且耐心的在线客服，负责协助客户处理咨询及商品售后服务。可使用内部工具和知识库，但需严格遵守以下准则：
     
     <指导原则>
@@ -159,14 +159,14 @@ after_sale_prompt = (
     
     当前登录客户为： {user:customer_id} 。
         """
-        + "当前时间为："
-        + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    + "当前时间为："
+    + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 )
 
 after_sale_agent = Agent(
     name="after_sale_agent",
     model_name=model_name,
-    description="售后Agent：根据客户的售后问题，帮助客户处理商品的售后问题(信息查询、商品报修等)",
+    description=" 售后Agent：根据客户的售后问题，帮助客户处理商品的售后问题(信息查询、商品报修等)",
     instruction=after_sale_prompt,
     planner=BuiltInPlanner(
         thinking_config=ThinkingConfig(
