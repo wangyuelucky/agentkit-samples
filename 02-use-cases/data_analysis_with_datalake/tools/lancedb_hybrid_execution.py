@@ -1,20 +1,24 @@
-import os
 import json
 from typing import Optional
 
 from rich.console import Console
 import pandas as pd
 
-console = Console()
-
 # Import the LanceDBManager singleton
 from .lancedb_manager import lancedb_manager
+
 # Import utility functions
 from .utils import get_multimodal_text_vector as _get_text_vector
 
+console = Console()
 
-def lancedb_hybrid_execution(query_text: str, filters: str = "", select: Optional[list] = None, limit: int = 10) -> str:
-    console.print(f"[lancedb_hybrid_execution] Inputs: query_text={query_text!r}, filters={filters!r}")
+
+def lancedb_hybrid_execution(
+    query_text: str, filters: str = "", select: Optional[list] = None, limit: int = 10
+) -> str:
+    console.print(
+        f"[lancedb_hybrid_execution] Inputs: query_text={query_text!r}, filters={filters!r}"
+    )
 
     # open table
     tbl, err = lancedb_manager.open_table()
@@ -50,13 +54,19 @@ def lancedb_hybrid_execution(query_text: str, filters: str = "", select: Optiona
             df_norm.columns = header
             records_obj = df_norm.to_dict(orient="records")
         except Exception:
-            records_obj = [{header[i]: row[i] for i in range(len(header))} for row in df.values.tolist()]
+            records_obj = [
+                {header[i]: row[i] for i in range(len(header))}
+                for row in df.values.tolist()
+            ]
         records = df.values.tolist()
-        return json.dumps({
-            "status": "ok",
-            "data": [header] + records,
-            "records": records_obj,
-            "meta": {"row_count": len(records)}
-        }, ensure_ascii=False)
+        return json.dumps(
+            {
+                "status": "ok",
+                "data": [header] + records,
+                "records": records_obj,
+                "meta": {"row_count": len(records)},
+            },
+            ensure_ascii=False,
+        )
     except Exception as e:
         return json.dumps({"error": f"混合检索失败: {e}"}, ensure_ascii=False)
